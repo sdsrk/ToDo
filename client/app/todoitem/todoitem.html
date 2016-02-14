@@ -1,0 +1,58 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<form novalidate style="padding-left:50px;" ng-show="isLoggedIn()">
+    <div class="row">
+        <div class="col-md-3">
+            <label><font color="white">To Do</font></label>
+            <input type="text" class="form-control" ng-model='model.todo' ng-required="true" />
+        </div>
+        <div class="col-md-4 ">
+            <label><font color="white">Location</font></label>
+            <input g-places-autocomplete class='form-control' type="text" ng-model='model.location' ng-required="true">
+        </div>        
+        <div class="col-md-3">
+        <label><font color="white">Time</font></label>
+            <p class="input-group">
+                <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="model.time" is-open="open" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openCalendar($event)"><i class="fa fa-calendar"></i></button>
+            </span>
+            </p>
+        </div>
+        <div class="col-md-1" style=" color:blue">
+          <br/>
+          <i style="font-size: 2.5em" class="fa fa-location-arrow" ng-click='setCurrentLoc()'></i>
+        </div>
+        <div class="col-md-1" style="margin-left: -55px;">
+        <label>  </label><br/>
+        	<input type="submit" ng-model='submit' ng-click='submit()' class="btn btn-success pull-right" />
+        </div>
+    </div>
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+      	<th><font color="blue">To Do</font></th>
+      	<th><font color="blue">Location</font></th>
+        <th><font color="blue">Time</font></th>
+        <th><font color="blue">Status</font></th>
+        <th><font color="blue">Option</font></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat='todo in todos'>
+      	<td><font color="white">{{todo.todo}}</font></td>
+      	<td><font color="white">{{todo.location}}</font></td>
+        <td><font color="white">{{todo.time | date : 'dd/MM/yyyy hh:mm'}}</font></td>
+        <td><font color="white">{{todo.active}}</font></td>
+        <td>
+          <div class="row">
+            <label class="col-sm-1"></label>
+            <button class="btn btn-success col-sm-3" ng-click ="update($index,'s')">snooze</button><label class="col-sm-1"></label>
+            <button class="btn btn-success col-sm-3" ng-click ="update($index,'c')">Close</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    
+</form>
+
